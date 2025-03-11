@@ -74,3 +74,33 @@ body {
     color: #fff;
     padding: 1rem;
 }
+/* Barra estilizada */
+.titulo-barra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Preto */
+    color: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.titulo-barra span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f06e00; /* Laranja rústico */
+}
+/* Estilos do logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 50px; /* Ajuste conforme necessário */
+    height: auto;
+    margin-left: 10px;
+}
