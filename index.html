@@ -15,8 +15,10 @@
         </div>
         <nav class="navbar">
             <a href="#cardapio">Cardápio</a>
-            <a href="#bebidas">Bebidas</a>
-            <a href="#pedido">Pedido</a>
+            <a href="index-bebidas.html">Bebidas</a>
+            <a href="index-sobre.html">Sobre</a>
+            <button id="carrinho-btn" class="btn-carrinho">Carrinho 🛒 (<span id="carrinho-quantidade">0</span>)</button>
+        </nav>
         </nav>
     </header>
     
@@ -27,6 +29,19 @@
             <div class="titulo-barra">
                 <span>Seleção de Lanches</span>
             </div>
+            <!-- Modal do Carrinho -->
+<div id="carrinho-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Itens no Carrinho</h2>
+        <ul id="carrinho-itens">
+            <!-- Itens do carrinho serão adicionados aqui dinamicamente -->
+        </ul>
+        <p id="total-carrinho"><strong>Total:</strong> R$ 0,00</p>
+        <button id="finalizar-compra" class="btn-finalizar">Finalizar Compra</button>
+    </div>
+</div>
+
             <!-- Item 1 -->
             <div class="item-lanche">
                 <img src="img/3.jfif" alt="Cheddar Bacon Deluxe">
@@ -34,6 +49,8 @@
                     <h3>Cheddar Bacon Deluxe</h3>
                     <p>Hambúrguer Angus 180g, queijo cheddar, bacon e molho especial.</p>
                     <p><strong>Preço:</strong> R$ 28,00</p>
+                    <button class="btn-comprar" data-nome="Cheddar Bacon Deluxe" data-preco="28.00">Comprar</button>
+                </div>
                 </div>
             </div>
             <!-- Item 2 -->
@@ -43,6 +60,7 @@
                     <h3>Burger Caipira</h3>
                     <p>Hambúrguer Angus 180g, queijo minas, ovo, alface e tomate.</p>
                     <p><strong>Preço:</strong> R$ 26,00</p>
+                    <button class="btn-comprar" data-nome="Burger Caipira" data-preco="26.00">Comprar</button>
                 </div>
             </div>
             <!-- Item 3 -->
@@ -52,6 +70,7 @@
                     <h3>Picanha na Brasa</h3>
                     <p>Hambúrguer de picanha, queijo prato, cebola caramelizada e barbecue.</p>
                     <p><strong>Preço:</strong> R$ 35,00</p>
+                    <button class="btn-comprar" data-nome="Picanha na Brasa" data-preco="35.00">Comprar</button>
                 </div>
             </div>
         </section>
@@ -65,3 +84,94 @@
     </footer>
 </body>
 </html>
+
+<script>
+    const carrinho = [];
+    const carrinhoQuantidade = document.getElementById('carrinho-quantidade');
+
+    // Função para adicionar itens ao carrinho
+    function adicionarAoCarrinho(nome, preco) {
+        carrinho.push({ nome, preco });
+        atualizarCarrinho();
+    }
+
+    // Atualizar a quantidade de itens no carrinho
+    function atualizarCarrinho() {
+        carrinhoQuantidade.textContent = carrinho.length;
+    }
+
+    // Adicionar evento aos botões de compra
+    const botoesComprar = document.querySelectorAll('.btn-comprar');
+    botoesComprar.forEach(botao => {
+        botao.addEventListener('click', () => {
+            const nome = botao.getAttribute('data-nome');
+            const preco = botao.getAttribute('data-preco');
+            adicionarAoCarrinho(nome, preco);
+        });
+    });
+</script>
+
+<script>
+    const carrinhoModal = document.getElementById('carrinho-modal');
+    const carrinhoBtn = document.getElementById('carrinho-btn');
+    const closeBtn = document.querySelector('.close-btn');
+    const carrinhoItens = document.getElementById('carrinho-itens');
+    const totalCarrinho = document.getElementById('total-carrinho');
+
+    // Mostrar o modal do carrinho
+    carrinhoBtn.addEventListener('click', () => {
+        atualizarModal();
+        carrinhoModal.style.display = 'flex';
+    });
+
+    // Fechar o modal
+    closeBtn.addEventListener('click', () => {
+        carrinhoModal.style.display = 'none';
+    });
+
+    // Fechar o modal ao clicar fora do conteúdo
+    window.addEventListener('click', (event) => {
+        if (event.target === carrinhoModal) {
+            carrinhoModal.style.display = 'none';
+        }
+    });
+
+    // Atualizar o modal com os itens do carrinho
+    function atualizarModal() {
+        carrinhoItens.innerHTML = ''; // Limpar lista de itens
+        let total = 0;
+
+        carrinho.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `${item.nome} - R$ ${parseFloat(item.preco).toFixed(2)}`;
+            carrinhoItens.appendChild(li);
+            total += parseFloat(item.preco);
+        });
+
+        totalCarrinho.innerHTML = `<strong>Total:</strong> R$ ${total.toFixed(2)}`;
+    }
+</script>
+
+<script>
+    const finalizarCompraBtn = document.getElementById('finalizar-compra');
+
+    // Função para finalizar a compra
+    finalizarCompraBtn.addEventListener('click', () => {
+        if (carrinho.length === 0) {
+            alert("O carrinho está vazio. Adicione itens antes de finalizar a compra!");
+            return;
+        }
+
+        // Exibe a mensagem de confirmação
+        alert("Compra realizada com sucesso! Obrigado por escolher a Pão & Fumaça. 🍔✨");
+
+        // Limpa o carrinho
+        carrinho.length = 0; // Esvazia o array
+        atualizarCarrinho(); // Atualiza o indicador no cabeçalho
+        carrinhoItens.innerHTML = ''; // Limpa os itens do modal
+        totalCarrinho.innerHTML = '<strong>Total:</strong> R$ 0,00'; // Reseta o total
+
+        // Fecha o modal
+        carrinhoModal.style.display = 'none';
+    });
+</script>
