@@ -121,7 +121,7 @@ body {
     background-attachment: fixed; 
     background-position: center; /* Centraliza a imagem */
     background-color: #000; /* Cor de fundo de fallback */                                                                                                           
-
+}
 /* Estilo da seção com fundo de imagem e conteúdo em caixa branca */
 .sobre-nos {
     background-image: url('img/front-view-burgers-stand.jpg'); /* Caminho da imagem */
