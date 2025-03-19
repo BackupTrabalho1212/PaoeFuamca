@@ -22,6 +22,10 @@ Cada prato deve conter:
 Cabeçalho com botões: HOME, CARDÁPIO, SOBRE NÓS
 Destaques: Mostrar os "Lanches do Dia"
 Botão "VER MAIS" direcionando para a página do cardápio
+
+![Texto Alternativo](img\home.png)
+
+
 ### Página do Cardápio
 Cabeçalho presente
 Listagem dos itens do cardápio:
