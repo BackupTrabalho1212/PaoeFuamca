@@ -131,6 +131,7 @@
     });
 </script>
 
+
 <script>
     const carrinhoModal = document.getElementById('carrinho-modal');
     const carrinhoBtn = document.getElementById('carrinho-btn');
@@ -194,4 +195,42 @@
         // Fecha o modal
         carrinhoModal.style.display = 'none';
     });
+</script>
+
+<script>
+    function atualizarModal() {
+    carrinhoItens.innerHTML = ''; // Limpar lista de itens
+    let total = 0;
+
+    carrinho.forEach((item, index) => {
+        // Criar um elemento <li> para cada item
+        const li = document.createElement('li');
+        li.innerHTML = `
+            ${item.nome} - R$ ${parseFloat(item.preco).toFixed(2)}
+            <button class="btn-remover" data-index="${index}">Remover</button>
+        `;
+        carrinhoItens.appendChild(li);
+
+        // Calcular o total
+        total += parseFloat(item.preco);
+    });
+
+    totalCarrinho.innerHTML = `<strong>Total:</strong> R$ ${total.toFixed(2)}`;
+
+    // Adicionar eventos aos botões de remover
+    const botoesRemover = document.querySelectorAll('.btn-remover');
+    botoesRemover.forEach(botao => {
+        botao.addEventListener('click', (e) => {
+            const index = e.target.getAttribute('data-index');
+            removerDoCarrinho(index);
+        });
+    });
+}
+
+function removerDoCarrinho(index) {
+    carrinho.splice(index, 1); // Remove o item do array pelo índice
+    atualizarCarrinho(); // Atualiza o contador de itens no cabeçalho
+    atualizarModal(); // Atualiza a exibição do modal
+}
+
 </script>

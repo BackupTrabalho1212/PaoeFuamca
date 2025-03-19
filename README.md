@@ -23,7 +23,7 @@ Cabeçalho com botões: HOME, CARDÁPIO, SOBRE NÓS
 Destaques: Mostrar os "Lanches do Dia"
 Botão "VER MAIS" direcionando para a página do cardápio
 
-![Texto Alternativo](img\home.png)
+<img src="img/home.png">
 
 
 ### Página do Cardápio
@@ -40,6 +40,8 @@ Coca-Cola - R$ 6,00
 Suco Natural de Laranja - R$ 8,00
 Refrigerante de Guaraná - R$ 6,00
 Chopp Artesanal - R$ 12,00
+
+<img src="img/bebida2.png">
 ##
 ### Recursos Extras
 Possibilidade de adicionar imagens aos pratos
